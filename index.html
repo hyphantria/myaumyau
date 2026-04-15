@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   <title>Rosemyau · Розовые комнатные растения</title>
-  <!-- Модный шрифт: Inter для чистоты + Fraunces для нежного акцента -->
+  <!-- Модный шрифт: Inter + Fraunces -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,300;1,9..144,300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <!-- Font Awesome для иконок -->
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
@@ -18,7 +18,7 @@
     }
 
     body {
-      background-color: #fcf7f4;  /* очень светлый пастельный тон */
+      background-color: #fcf7f4;
       font-family: 'Inter', sans-serif;
       color: #4a3e3b;
       line-height: 1.5;
@@ -31,7 +31,7 @@
       letter-spacing: -0.02em;
     }
 
-    /* плавное появление блоков */
+    /* плавное появление */
     .fade-section {
       opacity: 0;
       transform: translateY(25px);
@@ -43,7 +43,6 @@
       transform: translateY(0);
     }
 
-    /* Пастельная цветовая гамма */
     :root {
       --blush: #fadadd;
       --petal: #fbc4c0;
@@ -177,7 +176,7 @@
       filter: drop-shadow(0 10px 8px rgba(160, 100, 100, 0.1));
     }
 
-    /* СЕКЦИЯ СЛАЙДЕРА преимуществ (SVG + анимация) */
+    /* СЛАЙДЕР */
     .slider-section {
       margin: 70px 0 60px;
     }
@@ -250,7 +249,6 @@
       font-weight: 300;
     }
 
-    /* кнопки слайдера */
     .slider-btn {
       position: absolute;
       top: 50%;
@@ -309,7 +307,7 @@
       width: 30px;
     }
 
-    /* О нас + преимущества в тексте */
+    /* О нас */
     .about-preview {
       display: flex;
       gap: 40px;
@@ -360,7 +358,7 @@
       width: 36px;
     }
 
-    /* Каталог-сетка */
+    /* Каталог с ИЗОБРАЖЕНИЯМИ */
     .catalog {
       margin: 50px 0 70px;
     }
@@ -382,7 +380,7 @@
       background: #ffffffdb;
       backdrop-filter: blur(4px);
       border-radius: 32px;
-      padding: 28px 18px 22px;
+      padding: 24px 18px 22px;
       text-align: center;
       box-shadow: 0 10px 24px #f0dbd8;
       transition: all 0.3s ease;
@@ -395,10 +393,21 @@
       box-shadow: 0 22px 30px -8px #ebceca;
     }
 
-    .plant-card i {
-      font-size: 4.4rem;
-      color: #e1b2ac;
-      margin-bottom: 16px;
+    /* Стили для изображений */
+    .plant-img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 24px;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 14px rgba(190, 140, 140, 0.15);
+      border: 2px solid #fce4e0;
+      background-color: #f5e2df; /* fallback */
+      transition: transform 0.3s;
+    }
+
+    .plant-card:hover .plant-img {
+      transform: scale(1.02);
     }
 
     .plant-card h4 {
@@ -451,12 +460,21 @@
       .container { padding: 0 16px; }
       .hero-image i { font-size: 9rem; }
     }
+
+    /* fallback если изображение не загрузится */
+    .plant-img-error {
+      background: #fadadd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #a57e7a;
+      font-size: 2.5rem;
+    }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <!-- Шапка -->
   <header>
     <div class="logo">
       <i class="fas fa-leaf"></i> 
@@ -470,7 +488,7 @@
     </div>
   </header>
 
-  <!-- Hero блок с анимацией появления -->
+  <!-- Hero -->
   <section class="fade-section" id="hero-section">
     <div class="hero">
       <div class="hero-text">
@@ -483,36 +501,31 @@
       </div>
       <div class="hero-image">
         <i class="fas fa-seedling"></i>
-        <!-- иконка стилизованного растения -->
       </div>
     </div>
   </section>
 
-  <!-- СЛАЙДЕР преимуществ (основной акцент) -->
+  <!-- СЛАЙДЕР преимуществ -->
   <section class="fade-section slider-section" id="slider-section">
     <h2><i class="fas fa-heart" style="color: #e0b7b1; margin-right: 12px;"></i>почему Rosemyau?</h2>
     <div class="slider-wrapper">
       <div class="slider-container">
         <div class="slider-track" id="sliderTrack">
-          <!-- слайд 1 -->
           <div class="advantage-card">
             <div class="adv-icon"><i class="fas fa-hand-holding-heart"></i></div>
             <h3>бережный уход</h3>
             <p>Каждое растение адаптировано к домашним условиям. Мы даём подробную инструкцию и поддержку.</p>
           </div>
-          <!-- слайд 2 -->
           <div class="advantage-card">
             <div class="adv-icon"><i class="fas fa-palette"></i></div>
             <h3>пастельная эстетика</h3>
             <p>Отбираем сорта с розовыми, кремовыми и мятными оттенками — идеально впишутся в нежный интерьер.</p>
           </div>
-          <!-- слайд 3 -->
           <div class="advantage-card">
             <div class="adv-icon"><i class="fas fa-gem"></i></div>
             <h3>редкие экземпляры</h3>
             <p>В нашем каталоге: филодендрон «Pink Princess», калатеи, розовые сингониумы и многое другое.</p>
           </div>
-          <!-- слайд 4 -->
           <div class="advantage-card">
             <div class="adv-icon"><i class="fas fa-truck"></i></div>
             <h3>доставка с заботой</h3>
@@ -520,15 +533,13 @@
           </div>
         </div>
       </div>
-      <!-- кнопки слайдера -->
       <button class="slider-btn prev" id="prevSlide"><i class="fas fa-chevron-left"></i></button>
       <button class="slider-btn next" id="nextSlide"><i class="fas fa-chevron-right"></i></button>
-      <!-- точки индикации -->
       <div class="dots-container" id="dotsContainer"></div>
     </div>
   </section>
 
-  <!-- О нас + мини-преимущества (анимация при скролле) -->
+  <!-- О нас -->
   <section class="fade-section about-preview" id="about-section">
     <div class="about-text">
       <h2>rosemyau — это больше, чем растения</h2>
@@ -556,27 +567,35 @@
     </div>
   </section>
 
-  <!-- Каталог -->
+  <!-- Каталог с ИЗОБРАЖЕНИЯМИ -->
   <section class="fade-section catalog" id="catalog-section">
     <h2>розовые любимцы</h2>
     <div class="plant-grid">
+      <!-- 1. Филодендрон -->
       <div class="plant-card">
-        <i class="fas fa-leaf"></i>
+        <img src="image/image.png" alt="Филодендрон Pink Princess" class="plant-img" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="plant-img plant-img-error" style="display: none;"><i class="fas fa-leaf"></i></div>
         <h4>Филодендрон</h4>
         <p>Pink Princess</p>
       </div>
+      <!-- 2. Калатея -->
       <div class="plant-card">
-        <i class="fas fa-tree"></i>
+        <img src="image/kalateya.jpg" alt="Калатея розовый триколор" class="plant-img" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="plant-img plant-img-error" style="display: none;"><i class="fas fa-tree"></i></div>
         <h4>Калатея</h4>
         <p>Розовый триколор</p>
       </div>
+      <!-- 3. Сингониум -->
       <div class="plant-card">
-        <i class="fas fa-seedling"></i>
+        <img src="image/singonim.jpg" alt="Сингониум Neon robusta" class="plant-img" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="plant-img plant-img-error" style="display: none;"><i class="fas fa-seedling"></i></div>
         <h4>Сингониум</h4>
         <p>Neon robusta</p>
       </div>
+      <!-- 4. Аглаонема -->
       <div class="plant-card">
-        <i class="fas fa-clover"></i>
+        <img src="image/aglaoneoma.jfif" alt="Аглаонема Pink Valentine" class="plant-img" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="plant-img plant-img-error" style="display: none;"><i class="fas fa-clover"></i></div>
         <h4>Аглаонема</h4>
         <p>Pink Valentine</p>
       </div>
@@ -598,7 +617,7 @@
   (function(){
     "use strict";
 
-    // ---------- Intersection Observer для анимации fade-section (плавное появление) ----------
+    // Intersection Observer для fade-section
     const fadeElements = document.querySelectorAll('.fade-section');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -609,7 +628,7 @@
     }, { threshold: 0.2, rootMargin: '0px 0px -30px 0px' });
     fadeElements.forEach(el => observer.observe(el));
 
-    // ---------- Слайдер преимуществ ----------
+    // Слайдер преимуществ
     const track = document.getElementById('sliderTrack');
     const slides = Array.from(document.querySelectorAll('.advantage-card'));
     const prevBtn = document.getElementById('prevSlide');
@@ -620,7 +639,6 @@
     const totalSlides = slides.length;
     let autoSlideInterval;
 
-    // Создаём точки
     function createDots() {
       dotsContainer.innerHTML = '';
       for (let i = 0; i < totalSlides; i++) {
@@ -632,15 +650,11 @@
       }
     }
     createDots();
-
     const dots = document.querySelectorAll('.dot');
 
     function updateSlider() {
       const width = track.clientWidth;
-      // Сдвигаем трек
       track.style.transform = `translateX(-${currentIndex * width}px)`;
-      
-      // Обновляем активную точку
       dots.forEach((dot, idx) => {
         dot.classList.toggle('active', idx === currentIndex);
       });
@@ -673,34 +687,19 @@
       }, 6000);
     }
 
-    // Обработчики кнопок
     prevBtn.addEventListener('click', prevSlide);
     nextBtn.addEventListener('click', nextSlide);
+    window.addEventListener('resize', () => updateSlider());
 
-    // При изменении размера окна корректируем позицию
-    window.addEventListener('resize', () => {
-      updateSlider();
-    });
-
-    // Пауза автопрокрутки при наведении на слайдер
     const sliderWrapper = document.querySelector('.slider-wrapper');
-    sliderWrapper.addEventListener('mouseenter', () => {
-      clearInterval(autoSlideInterval);
-    });
-    sliderWrapper.addEventListener('mouseleave', () => {
-      resetAutoSlide();
-    });
+    sliderWrapper.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+    sliderWrapper.addEventListener('mouseleave', () => resetAutoSlide());
 
-    // Инициализация: установка правильной позиции и запуск автопрокрутки
     updateSlider();
     resetAutoSlide();
-
-    // Для первого слайда (вручную убедимся, что видим)
-    // Дополнительно: если слайдер не сразу в зоне видимости, анимация все равно сработает
-    // Также чтобы слайды не дёргались после загрузки шрифтов
     setTimeout(() => updateSlider(), 50);
-    
-    // также можно добавить свайп для мобильных (простой вариант)
+
+    // свайп
     let touchStartX = 0;
     let touchEndX = 0;
     const sliderContainer = document.querySelector('.slider-container');
@@ -717,18 +716,12 @@
     
     function handleSwipe() {
       const threshold = 50;
-      if (touchEndX < touchStartX - threshold) {
-        nextSlide();
-      }
-      if (touchEndX > touchStartX + threshold) {
-        prevSlide();
-      }
+      if (touchEndX < touchStartX - threshold) nextSlide();
+      if (touchEndX > touchStartX + threshold) prevSlide();
     }
 
-    // на всякий случай остановить интервал при уходе со страницы
     window.addEventListener('beforeunload', () => clearInterval(autoSlideInterval));
   })();
 </script>
-<!-- небольшая ручная коррекция для слайдера после полной загрузки -->
 </body>
 </html>
