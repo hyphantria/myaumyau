@@ -1,1 +1,734 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Rosemyau · Розовые комнатные растения</title>
+  <!-- Модный шрифт: Inter для чистоты + Fraunces для нежного акцента -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,300;1,9..144,300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Font Awesome для иконок -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
+    body {
+      background-color: #fcf7f4;  /* очень светлый пастельный тон */
+      font-family: 'Inter', sans-serif;
+      color: #4a3e3b;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .serif {
+      font-family: 'Fraunces', serif;
+      font-weight: 350;
+      letter-spacing: -0.02em;
+    }
+
+    /* плавное появление блоков */
+    .fade-section {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.9s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.9s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+
+    .fade-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Пастельная цветовая гамма */
+    :root {
+      --blush: #fadadd;
+      --petal: #fbc4c0;
+      --mint: #e2f0e0;
+      --cream: #fef7e9;
+      --dusty-rose: #d9b8bb;
+      --soft-green: #c7ddcc;
+      --text-soft: #5f4e49;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Шапка */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0 16px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-family: 'Fraunces', serif;
+      font-size: 2.1rem;
+      font-weight: 350;
+      color: #966b71;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo i {
+      font-size: 2rem;
+      color: #e7b5ac;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #7a625e;
+      font-weight: 400;
+      font-size: 1.1rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #c17a7a;
+    }
+
+    /* Hero */
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      margin: 30px 0 70px;
+      flex-wrap: wrap;
+    }
+
+    .hero-text {
+      flex: 1 1 300px;
+    }
+
+    .hero-text h1 {
+      font-size: 3.8rem;
+      font-weight: 300;
+      line-height: 1.2;
+      color: #7f595e;
+      margin-bottom: 18px;
+    }
+
+    .hero-text h1 i {
+      color: #dba9a9;
+      margin-right: 8px;
+    }
+
+    .hero-text p {
+      font-size: 1.3rem;
+      margin-bottom: 28px;
+      color: #6f5954;
+      font-weight: 300;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #e7c5c0;
+      color: #563e3a;
+      padding: 14px 32px;
+      border-radius: 48px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.2rem;
+      box-shadow: 0 6px 14px rgba(215, 160, 160, 0.15);
+      transition: all 0.25s;
+      border: 1px solid rgba(255, 240, 240, 0.6);
+    }
+
+    .btn i {
+      margin-left: 8px;
+    }
+
+    .btn:hover {
+      background-color: #f0cdc7;
+      box-shadow: 0 10px 20px rgba(190, 140, 140, 0.2);
+      transform: scale(1.02);
+      color: #3f2d2a;
+    }
+
+    .hero-image {
+      flex: 1 1 300px;
+      background: linear-gradient(145deg, #f9e2dd, #f1d4d0);
+      border-radius: 60% 40% 40% 60% / 50% 40% 60% 50%;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 25px 30px -10px rgba(190, 140, 140, 0.2);
+      border: 2px solid #ffeae6;
+    }
+
+    .hero-image i {
+      font-size: 12rem;
+      color: #bd8d8d;
+      filter: drop-shadow(0 10px 8px rgba(160, 100, 100, 0.1));
+    }
+
+    /* СЕКЦИЯ СЛАЙДЕРА преимуществ (SVG + анимация) */
+    .slider-section {
+      margin: 70px 0 60px;
+    }
+
+    .slider-section h2 {
+      font-size: 2.6rem;
+      font-weight: 320;
+      text-align: center;
+      margin-bottom: 40px;
+      color: #7d5e5e;
+    }
+
+    .slider-wrapper {
+      position: relative;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .slider-container {
+      overflow: hidden;
+      border-radius: 48px;
+      background: #fffaf8;
+      box-shadow: 0 18px 30px -8px rgba(170, 130, 130, 0.12);
+      padding: 20px 0;
+      border: 1px solid #ffefec;
+    }
+
+    .slider-track {
+      display: flex;
+      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+      will-change: transform;
+    }
+
+    .advantage-card {
+      flex: 0 0 100%;
+      padding: 30px 40px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background: #fffdfb;
+    }
+
+    .adv-icon {
+      font-size: 3.8rem;
+      color: #d6a5a0;
+      margin-bottom: 20px;
+      background: #feedec;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: transform 0.3s;
+      box-shadow: 0 6px 12px #edd6d3;
+    }
+
+    .advantage-card h3 {
+      font-size: 2.2rem;
+      font-weight: 340;
+      margin-bottom: 14px;
+      color: #88635f;
+    }
+
+    .advantage-card p {
+      font-size: 1.2rem;
+      max-width: 550px;
+      color: #78625e;
+      font-weight: 300;
+    }
+
+    /* кнопки слайдера */
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #f5e3e0;
+      border: none;
+      width: 52px;
+      height: 52px;
+      border-radius: 40px;
+      font-size: 1.8rem;
+      color: #7f5a56;
+      cursor: pointer;
+      box-shadow: 0 5px 12px rgba(150, 110, 110, 0.1);
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+      border: 1px solid #ffdbd6;
+    }
+
+    .slider-btn:hover {
+      background: #fad3cd;
+      color: #503d3a;
+      box-shadow: 0 8px 18px rgba(190, 140, 140, 0.2);
+    }
+
+    .slider-btn.prev {
+      left: -20px;
+    }
+
+    .slider-btn.next {
+      right: -20px;
+    }
+
+    .dots-container {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      background: #ebd4d1;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      transition: 0.25s;
+      padding: 0;
+    }
+
+    .dot.active {
+      background: #bc8a86;
+      width: 30px;
+    }
+
+    /* О нас + преимущества в тексте */
+    .about-preview {
+      display: flex;
+      gap: 40px;
+      margin: 70px 0 60px;
+      flex-wrap: wrap;
+    }
+
+    .about-text {
+      flex: 2 1 300px;
+    }
+
+    .about-text h2 {
+      font-size: 2.4rem;
+      margin-bottom: 18px;
+      color: #83645e;
+    }
+
+    .about-text p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      color: #5e4b46;
+    }
+
+    .mini-features {
+      flex: 1.2 1 240px;
+      background: #fef2ef;
+      border-radius: 32px;
+      padding: 28px 24px;
+      border: 1px solid #fadcd8;
+    }
+
+    .mini-features h3 {
+      font-size: 1.9rem;
+      margin-bottom: 20px;
+      color: #7a5b58;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .feature-item i {
+      font-size: 2rem;
+      color: #caa5a0;
+      width: 36px;
+    }
+
+    /* Каталог-сетка */
+    .catalog {
+      margin: 50px 0 70px;
+    }
+
+    .catalog h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 40px;
+      color: #7d5d5a;
+    }
+
+    .plant-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 28px;
+    }
+
+    .plant-card {
+      background: #ffffffdb;
+      backdrop-filter: blur(4px);
+      border-radius: 32px;
+      padding: 28px 18px 22px;
+      text-align: center;
+      box-shadow: 0 10px 24px #f0dbd8;
+      transition: all 0.3s ease;
+      border: 1px solid #ffede9;
+    }
+
+    .plant-card:hover {
+      transform: translateY(-6px);
+      background: white;
+      box-shadow: 0 22px 30px -8px #ebceca;
+    }
+
+    .plant-card i {
+      font-size: 4.4rem;
+      color: #e1b2ac;
+      margin-bottom: 16px;
+    }
+
+    .plant-card h4 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.8rem;
+      font-weight: 330;
+      color: #825f5a;
+    }
+
+    .plant-card p {
+      margin: 8px 0;
+      color: #7c6762;
+    }
+
+    /* footer */
+    footer {
+      margin-top: 60px;
+      padding: 30px 0 20px;
+      border-top: 1px solid #edd9d5;
+      color: #7d645f;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .social i {
+      font-size: 1.8rem;
+      margin-left: 18px;
+      color: #b78f8b;
+      transition: color 0.2s;
+    }
+
+    .social i:hover {
+      color: #94615c;
+    }
+
+    /* адаптив */
+    @media (max-width: 700px) {
+      .hero-text h1 { font-size: 2.8rem; }
+      .slider-btn.prev { left: 0; }
+      .slider-btn.next { right: 0; }
+      .slider-btn { width: 44px; height: 44px; }
+      .advantage-card { padding: 20px 20px 30px; }
+      header { flex-direction: column; gap: 12px; }
+      .nav-links { gap: 24px; }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      .hero-image i { font-size: 9rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Шапка -->
+  <header>
+    <div class="logo">
+      <i class="fas fa-leaf"></i> 
+      Rosemyau
+    </div>
+    <div class="nav-links">
+      <a href="#">Главная</a>
+      <a href="#">Растения</a>
+      <a href="#">Уход</a>
+      <a href="#">О нас</a>
+    </div>
+  </header>
+
+  <!-- Hero блок с анимацией появления -->
+  <section class="fade-section" id="hero-section">
+    <div class="hero">
+      <div class="hero-text">
+        <h1>
+          <i class="fas fa-spa"></i> 
+          розовая нежность<br>в каждом листе
+        </h1>
+        <p>Rosemyau — коллекция комнатных растений в пастельных тонах. Стиль, уют и свежесть.</p>
+        <a href="#" class="btn">Выбрать растение <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="hero-image">
+        <i class="fas fa-seedling"></i>
+        <!-- иконка стилизованного растения -->
+      </div>
+    </div>
+  </section>
+
+  <!-- СЛАЙДЕР преимуществ (основной акцент) -->
+  <section class="fade-section slider-section" id="slider-section">
+    <h2><i class="fas fa-heart" style="color: #e0b7b1; margin-right: 12px;"></i>почему Rosemyau?</h2>
+    <div class="slider-wrapper">
+      <div class="slider-container">
+        <div class="slider-track" id="sliderTrack">
+          <!-- слайд 1 -->
+          <div class="advantage-card">
+            <div class="adv-icon"><i class="fas fa-hand-holding-heart"></i></div>
+            <h3>бережный уход</h3>
+            <p>Каждое растение адаптировано к домашним условиям. Мы даём подробную инструкцию и поддержку.</p>
+          </div>
+          <!-- слайд 2 -->
+          <div class="advantage-card">
+            <div class="adv-icon"><i class="fas fa-palette"></i></div>
+            <h3>пастельная эстетика</h3>
+            <p>Отбираем сорта с розовыми, кремовыми и мятными оттенками — идеально впишутся в нежный интерьер.</p>
+          </div>
+          <!-- слайд 3 -->
+          <div class="advantage-card">
+            <div class="adv-icon"><i class="fas fa-gem"></i></div>
+            <h3>редкие экземпляры</h3>
+            <p>В нашем каталоге: филодендрон «Pink Princess», калатеи, розовые сингониумы и многое другое.</p>
+          </div>
+          <!-- слайд 4 -->
+          <div class="advantage-card">
+            <div class="adv-icon"><i class="fas fa-truck"></i></div>
+            <h3>доставка с заботой</h3>
+            <p>Упаковываем в термо-коробки. Растение приедет здоровым даже в прохладную погоду.</p>
+          </div>
+        </div>
+      </div>
+      <!-- кнопки слайдера -->
+      <button class="slider-btn prev" id="prevSlide"><i class="fas fa-chevron-left"></i></button>
+      <button class="slider-btn next" id="nextSlide"><i class="fas fa-chevron-right"></i></button>
+      <!-- точки индикации -->
+      <div class="dots-container" id="dotsContainer"></div>
+    </div>
+  </section>
+
+  <!-- О нас + мини-преимущества (анимация при скролле) -->
+  <section class="fade-section about-preview" id="about-section">
+    <div class="about-text">
+      <h2>rosemyau — это больше, чем растения</h2>
+      <p>Мы создаём пространство, где природа встречается с дизайном. В основе — любовь к пастельным оттенкам и комнатным джунглям. Каждое растение проходит карантин и акклиматизацию.</p>
+      <p>Наша миссия — наполнить ваш дом живыми акцентами нежных тонов.</p>
+    </div>
+    <div class="mini-features">
+      <h3><i class="fas fa-sparkle" style="margin-right: 8px;"></i> преимущества</h3>
+      <div class="feature-item">
+        <i class="fas fa-calendar-check"></i>
+        <span>Гарантия 14 дней</span>
+      </div>
+      <div class="feature-item">
+        <i class="fas fa-droplet"></i>
+        <span>Автополив в подарок</span>
+      </div>
+      <div class="feature-item">
+        <i class="fas fa-message"></i>
+        <span>Консультация 24/7</span>
+      </div>
+      <div class="feature-item">
+        <i class="fas fa-pagelines"></i>
+        <span>Только органика</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Каталог -->
+  <section class="fade-section catalog" id="catalog-section">
+    <h2>розовые любимцы</h2>
+    <div class="plant-grid">
+      <div class="plant-card">
+        <i class="fas fa-leaf"></i>
+        <h4>Филодендрон</h4>
+        <p>Pink Princess</p>
+      </div>
+      <div class="plant-card">
+        <i class="fas fa-tree"></i>
+        <h4>Калатея</h4>
+        <p>Розовый триколор</p>
+      </div>
+      <div class="plant-card">
+        <i class="fas fa-seedling"></i>
+        <h4>Сингониум</h4>
+        <p>Neon robusta</p>
+      </div>
+      <div class="plant-card">
+        <i class="fas fa-clover"></i>
+        <h4>Аглаонема</h4>
+        <p>Pink Valentine</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div>© 2025 Rosemyau — нежность в каждом ростке</div>
+    <div class="social">
+      <i class="fab fa-instagram"></i>
+      <i class="fab fa-telegram"></i>
+      <i class="fab fa-pinterest"></i>
+    </div>
+  </footer>
+</div>
+
+<script>
+  (function(){
+    "use strict";
+
+    // ---------- Intersection Observer для анимации fade-section (плавное появление) ----------
+    const fadeElements = document.querySelectorAll('.fade-section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2, rootMargin: '0px 0px -30px 0px' });
+    fadeElements.forEach(el => observer.observe(el));
+
+    // ---------- Слайдер преимуществ ----------
+    const track = document.getElementById('sliderTrack');
+    const slides = Array.from(document.querySelectorAll('.advantage-card'));
+    const prevBtn = document.getElementById('prevSlide');
+    const nextBtn = document.getElementById('nextSlide');
+    const dotsContainer = document.getElementById('dotsContainer');
+
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+    let autoSlideInterval;
+
+    // Создаём точки
+    function createDots() {
+      dotsContainer.innerHTML = '';
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('button');
+        dot.classList.add('dot');
+        dot.setAttribute('aria-label', `Перейти к слайду ${i+1}`);
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+      }
+    }
+    createDots();
+
+    const dots = document.querySelectorAll('.dot');
+
+    function updateSlider() {
+      const width = track.clientWidth;
+      // Сдвигаем трек
+      track.style.transform = `translateX(-${currentIndex * width}px)`;
+      
+      // Обновляем активную точку
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === currentIndex);
+      });
+    }
+
+    function goToSlide(index) {
+      if (index < 0) index = 0;
+      if (index >= totalSlides) index = totalSlides - 1;
+      currentIndex = index;
+      updateSlider();
+      resetAutoSlide();
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      updateSlider();
+      resetAutoSlide();
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      updateSlider();
+      resetAutoSlide();
+    }
+
+    function resetAutoSlide() {
+      clearInterval(autoSlideInterval);
+      autoSlideInterval = setInterval(() => {
+        nextSlide();
+      }, 6000);
+    }
+
+    // Обработчики кнопок
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+
+    // При изменении размера окна корректируем позицию
+    window.addEventListener('resize', () => {
+      updateSlider();
+    });
+
+    // Пауза автопрокрутки при наведении на слайдер
+    const sliderWrapper = document.querySelector('.slider-wrapper');
+    sliderWrapper.addEventListener('mouseenter', () => {
+      clearInterval(autoSlideInterval);
+    });
+    sliderWrapper.addEventListener('mouseleave', () => {
+      resetAutoSlide();
+    });
+
+    // Инициализация: установка правильной позиции и запуск автопрокрутки
+    updateSlider();
+    resetAutoSlide();
+
+    // Для первого слайда (вручную убедимся, что видим)
+    // Дополнительно: если слайдер не сразу в зоне видимости, анимация все равно сработает
+    // Также чтобы слайды не дёргались после загрузки шрифтов
+    setTimeout(() => updateSlider(), 50);
+    
+    // также можно добавить свайп для мобильных (простой вариант)
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const sliderContainer = document.querySelector('.slider-container');
+    sliderContainer.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      clearInterval(autoSlideInterval);
+    }, {passive: true});
+    
+    sliderContainer.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+      resetAutoSlide();
+    });
+    
+    function handleSwipe() {
+      const threshold = 50;
+      if (touchEndX < touchStartX - threshold) {
+        nextSlide();
+      }
+      if (touchEndX > touchStartX + threshold) {
+        prevSlide();
+      }
+    }
+
+    // на всякий случай остановить интервал при уходе со страницы
+    window.addEventListener('beforeunload', () => clearInterval(autoSlideInterval));
+  })();
+</script>
+<!-- небольшая ручная коррекция для слайдера после полной загрузки -->
+</body>
+</html>
